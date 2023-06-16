@@ -1,0 +1,13 @@
+[package]
+name = "corelib"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+nalgebra = { version="0.32", features=["serde-serialize"] }
+phf = { version="0.11", features = ["macros"] }
+regex = "1.6"
+rayon = "1.5.3"
+thiserror = "1.0.30"

@@ -1,0 +1,6 @@
+[workspace]
+members = ["src/rust/bins/*", "src/rust/libs/*"]
+
+[profile.release]
+lto = true
+opt-level = 3

@@ -1,0 +1,1124 @@
+[
+    {
+        "element": "H",
+        "potcar_name": "H",
+        "enmax": 250,
+        "recommended": true
+    },
+    {
+        "element": "H",
+        "potcar_name": "H_AE",
+        "enmax": 1000,
+        "recommended": false
+    },
+    {
+        "element": "H",
+        "potcar_name": "H_h",
+        "enmax": 700,
+        "recommended": false
+    },
+    {
+        "element": "H",
+        "potcar_name": "H_s",
+        "enmax": 200,
+        "recommended": false
+    },
+    {
+        "element": "He",
+        "potcar_name": "He",
+        "enmax": 479,
+        "recommended": true
+    },
+    {
+        "element": "Li",
+        "potcar_name": "Li",
+        "enmax": 140,
+        "recommended": false
+    },
+    {
+        "element": "Li",
+        "potcar_name": "Li_sv",
+        "enmax": 499,
+        "recommended": true
+    },
+    {
+        "element": "Be",
+        "potcar_name": "Be",
+        "enmax": 248,
+        "recommended": true
+    },
+    {
+        "element": "Be",
+        "potcar_name": "Be_sv",
+        "enmax": 309,
+        "recommended": false
+    },
+    {
+        "element": "B",
+        "potcar_name": "B",
+        "enmax": 319,
+        "recommended": true
+    },
+    {
+        "element": "B",
+        "potcar_name": "B_h",
+        "enmax": 700,
+        "recommended": false
+    },
+    {
+        "element": "B",
+        "potcar_name": "B_s",
+        "enmax": 269,
+        "recommended": false
+    },
+    {
+        "element": "C",
+        "potcar_name": "C",
+        "enmax": 400,
+        "recommended": true
+    },
+    {
+        "element": "C",
+        "potcar_name": "C_h",
+        "enmax": 700,
+        "recommended": false
+    },
+    {
+        "element": "C",
+        "potcar_name": "C_s",
+        "enmax": 274,
+        "recommended": false
+    },
+    {
+        "element": "N",
+        "potcar_name": "N",
+        "enmax": 400,
+        "recommended": true
+    },
+    {
+        "element": "N",
+        "potcar_name": "N_h",
+        "enmax": 700,
+        "recommended": false
+    },
+    {
+        "element": "N",
+        "potcar_name": "N_s",
+        "enmax": 280,
+        "recommended": false
+    },
+    {
+        "element": "O",
+        "potcar_name": "O",
+        "enmax": 400,
+        "recommended": true
+    },
+    {
+        "element": "O",
+        "potcar_name": "O_h",
+        "enmax": 700,
+        "recommended": false
+    },
+    {
+        "element": "O",
+        "potcar_name": "O_s",
+        "enmax": 283,
+        "recommended": false
+    },
+    {
+        "element": "F",
+        "potcar_name": "F",
+        "enmax": 400,
+        "recommended": true
+    },
+    {
+        "element": "F",
+        "potcar_name": "F_h",
+        "enmax": 773,
+        "recommended": false
+    },
+    {
+        "element": "F",
+        "potcar_name": "F_s",
+        "enmax": 290,
+        "recommended": false
+    },
+    {
+        "element": "Ne",
+        "potcar_name": "Ne",
+        "enmax": 344,
+        "recommended": true
+    },
+    {
+        "element": "Na",
+        "potcar_name": "Na",
+        "enmax": 102,
+        "recommended": false
+    },
+    {
+        "element": "Na",
+        "potcar_name": "Na_pv",
+        "enmax": 260,
+        "recommended": true
+    },
+    {
+        "element": "Na",
+        "potcar_name": "Na_sv",
+        "enmax": 646,
+        "recommended": false
+    },
+    {
+        "element": "Mg",
+        "potcar_name": "Mg",
+        "enmax": 200,
+        "recommended": true
+    },
+    {
+        "element": "Mg",
+        "potcar_name": "Mg_pv",
+        "enmax": 404,
+        "recommended": false
+    },
+    {
+        "element": "Mg",
+        "potcar_name": "Mg_sv",
+        "enmax": 495,
+        "recommended": false
+    },
+    {
+        "element": "Al",
+        "potcar_name": "Al",
+        "enmax": 240,
+        "recommended": true
+    },
+    {
+        "element": "Si",
+        "potcar_name": "Si",
+        "enmax": 245,
+        "recommended": true
+    },
+    {
+        "element": "P",
+        "potcar_name": "P",
+        "enmax": 255,
+        "recommended": true
+    },
+    {
+        "element": "P",
+        "potcar_name": "P_h",
+        "enmax": 390,
+        "recommended": false
+    },
+    {
+        "element": "S",
+        "potcar_name": "S",
+        "enmax": 259,
+        "recommended": true
+    },
+    {
+        "element": "S",
+        "potcar_name": "S_h",
+        "enmax": 402,
+        "recommended": false
+    },
+    {
+        "element": "Cl",
+        "potcar_name": "Cl",
+        "enmax": 262,
+        "recommended": true
+    },
+    {
+        "element": "Cl",
+        "potcar_name": "Cl_h",
+        "enmax": 409,
+        "recommended": false
+    },
+    {
+        "element": "Ar",
+        "potcar_name": "Ar",
+        "enmax": 266,
+        "recommended": true
+    },
+    {
+        "element": "K",
+        "potcar_name": "K_pv",
+        "enmax": 117,
+        "recommended": false
+    },
+    {
+        "element": "K",
+        "potcar_name": "K_sv",
+        "enmax": 259,
+        "recommended": true
+    },
+    {
+        "element": "Ca",
+        "potcar_name": "Ca_pv",
+        "enmax": 120,
+        "recommended": false
+    },
+    {
+        "element": "Ca",
+        "potcar_name": "Ca_sv",
+        "enmax": 267,
+        "recommended": true
+    },
+    {
+        "element": "Sc",
+        "potcar_name": "Sc",
+        "enmax": 155,
+        "recommended": false
+    },
+    {
+        "element": "Sc",
+        "potcar_name": "Sc_sv",
+        "enmax": 223,
+        "recommended": true
+    },
+    {
+        "element": "Ti",
+        "potcar_name": "Ti",
+        "enmax": 178,
+        "recommended": false
+    },
+    {
+        "element": "Ti",
+        "potcar_name": "Ti_pv",
+        "enmax": 222,
+        "recommended": false
+    },
+    {
+        "element": "Ti",
+        "potcar_name": "Ti_sv",
+        "enmax": 275,
+        "recommended": true
+    },
+    {
+        "element": "V",
+        "potcar_name": "V",
+        "enmax": 193,
+        "recommended": false
+    },
+    {
+        "element": "V",
+        "potcar_name": "V_pv",
+        "enmax": 264,
+        "recommended": false
+    },
+    {
+        "element": "V",
+        "potcar_name": "V_sv",
+        "enmax": 264,
+        "recommended": true
+    },
+    {
+        "element": "Cr",
+        "potcar_name": "Cr",
+        "enmax": 227,
+        "recommended": false
+    },
+    {
+        "element": "Cr",
+        "potcar_name": "Cr_pv",
+        "enmax": 266,
+        "recommended": true
+    },
+    {
+        "element": "Cr",
+        "potcar_name": "Cr_sv",
+        "enmax": 395,
+        "recommended": false
+    },
+    {
+        "element": "Mn",
+        "potcar_name": "Mn",
+        "enmax": 270,
+        "recommended": false
+    },
+    {
+        "element": "Mn",
+        "potcar_name": "Mn_pv",
+        "enmax": 270,
+        "recommended": true
+    },
+    {
+        "element": "Mn",
+        "potcar_name": "Mn_sv",
+        "enmax": 387,
+        "recommended": false
+    },
+    {
+        "element": "Fe",
+        "potcar_name": "Fe",
+        "enmax": 268,
+        "recommended": true
+    },
+    {
+        "element": "Fe",
+        "potcar_name": "Fe_pv",
+        "enmax": 293,
+        "recommended": false
+    },
+    {
+        "element": "Fe",
+        "potcar_name": "Fe_sv",
+        "enmax": 391,
+        "recommended": false
+    },
+    {
+        "element": "Co",
+        "potcar_name": "Co",
+        "enmax": 268,
+        "recommended": true
+    },
+    {
+        "element": "Co",
+        "potcar_name": "Co_pv",
+        "enmax": 271,
+        "recommended": false
+    },
+    {
+        "element": "Co",
+        "potcar_name": "Co_sv",
+        "enmax": 390,
+        "recommended": false
+    },
+    {
+        "element": "Ni",
+        "potcar_name": "Ni",
+        "enmax": 270,
+        "recommended": true
+    },
+    {
+        "element": "Ni",
+        "potcar_name": "Ni_pv",
+        "enmax": 368,
+        "recommended": false
+    },
+    {
+        "element": "Cu",
+        "potcar_name": "Cu",
+        "enmax": 295,
+        "recommended": true
+    },
+    {
+        "element": "Cu",
+        "potcar_name": "Cu_pv",
+        "enmax": 369,
+        "recommended": false
+    },
+    {
+        "element": "Zn",
+        "potcar_name": "Zn",
+        "enmax": 277,
+        "recommended": true
+    },
+    {
+        "element": "Ga",
+        "potcar_name": "Ga",
+        "enmax": 135,
+        "recommended": false
+    },
+    {
+        "element": "Ga",
+        "potcar_name": "Ga_d",
+        "enmax": 283,
+        "recommended": true
+    },
+    {
+        "element": "Ga",
+        "potcar_name": "Ga_h",
+        "enmax": 405,
+        "recommended": false
+    },
+    {
+        "element": "Ge",
+        "potcar_name": "Ge",
+        "enmax": 174,
+        "recommended": false
+    },
+    {
+        "element": "Ge",
+        "potcar_name": "Ge_d",
+        "enmax": 310,
+        "recommended": true
+    },
+    {
+        "element": "Ge",
+        "potcar_name": "Ge_h",
+        "enmax": 410,
+        "recommended": false
+    },
+    {
+        "element": "As",
+        "potcar_name": "As",
+        "enmax": 209,
+        "recommended": true
+    },
+    {
+        "element": "As",
+        "potcar_name": "As_d",
+        "enmax": 289,
+        "recommended": false
+    },
+    {
+        "element": "Se",
+        "potcar_name": "Se",
+        "enmax": 212,
+        "recommended": true
+    },
+    {
+        "element": "Br",
+        "potcar_name": "Br",
+        "enmax": 216,
+        "recommended": true
+    },
+    {
+        "element": "Kr",
+        "potcar_name": "Kr",
+        "enmax": 185,
+        "recommended": true
+    },
+    {
+        "element": "Rb",
+        "potcar_name": "Rb_pv",
+        "enmax": 122,
+        "recommended": false
+    },
+    {
+        "element": "Rb",
+        "potcar_name": "Rb_sv",
+        "enmax": 220,
+        "recommended": true
+    },
+    {
+        "element": "Sr",
+        "potcar_name": "Sr_sv",
+        "enmax": 229,
+        "recommended": true
+    },
+    {
+        "element": "Y",
+        "potcar_name": "Y_sv",
+        "enmax": 203,
+        "recommended": true
+    },
+    {
+        "element": "Zr",
+        "potcar_name": "Zr_sv",
+        "enmax": 230,
+        "recommended": true
+    },
+    {
+        "element": "Nb",
+        "potcar_name": "Nb_pv",
+        "enmax": 209,
+        "recommended": false
+    },
+    {
+        "element": "Nb",
+        "potcar_name": "Nb_sv",
+        "enmax": 293,
+        "recommended": true
+    },
+    {
+        "element": "Mo",
+        "potcar_name": "Mo",
+        "enmax": 225,
+        "recommended": false
+    },
+    {
+        "element": "Mo",
+        "potcar_name": "Mo_pv",
+        "enmax": 225,
+        "recommended": false
+    },
+    {
+        "element": "Mo",
+        "potcar_name": "Mo_sv",
+        "enmax": 243,
+        "recommended": true
+    },
+    {
+        "element": "Tc",
+        "potcar_name": "Tc",
+        "enmax": 229,
+        "recommended": false
+    },
+    {
+        "element": "Tc",
+        "potcar_name": "Tc_pv",
+        "enmax": 264,
+        "recommended": true
+    },
+    {
+        "element": "Tc",
+        "potcar_name": "Tc_sv",
+        "enmax": 319,
+        "recommended": false
+    },
+    {
+        "element": "Ru",
+        "potcar_name": "Ru",
+        "enmax": 213,
+        "recommended": false
+    },
+    {
+        "element": "Ru",
+        "potcar_name": "Ru_pv",
+        "enmax": 240,
+        "recommended": true
+    },
+    {
+        "element": "Ru",
+        "potcar_name": "Ru_sv",
+        "enmax": 319,
+        "recommended": false
+    },
+    {
+        "element": "Rh",
+        "potcar_name": "Rh",
+        "enmax": 229,
+        "recommended": false
+    },
+    {
+        "element": "Rh",
+        "potcar_name": "Rh_pv",
+        "enmax": 247,
+        "recommended": true
+    },
+    {
+        "element": "Pd",
+        "potcar_name": "Pd",
+        "enmax": 251,
+        "recommended": true
+    },
+    {
+        "element": "Pd",
+        "potcar_name": "Pd_pv",
+        "enmax": 251,
+        "recommended": false
+    },
+    {
+        "element": "Ag",
+        "potcar_name": "Ag",
+        "enmax": 250,
+        "recommended": true
+    },
+    {
+        "element": "Ag",
+        "potcar_name": "Ag_pv",
+        "enmax": 298,
+        "recommended": false
+    },
+    {
+        "element": "Cd",
+        "potcar_name": "Cd",
+        "enmax": 274,
+        "recommended": true
+    },
+    {
+        "element": "In",
+        "potcar_name": "In",
+        "enmax": 96,
+        "recommended": false
+    },
+    {
+        "element": "In",
+        "potcar_name": "In_d",
+        "enmax": 239,
+        "recommended": true
+    },
+    {
+        "element": "Sn",
+        "potcar_name": "Sn",
+        "enmax": 103,
+        "recommended": false
+    },
+    {
+        "element": "Sn",
+        "potcar_name": "Sn_d",
+        "enmax": 241,
+        "recommended": true
+    },
+    {
+        "element": "Sb",
+        "potcar_name": "Sb",
+        "enmax": 172,
+        "recommended": true
+    },
+    {
+        "element": "Te",
+        "potcar_name": "Te",
+        "enmax": 175,
+        "recommended": true
+    },
+    {
+        "element": "I",
+        "potcar_name": "I",
+        "enmax": 176,
+        "recommended": true
+    },
+    {
+        "element": "Xe",
+        "potcar_name": "Xe",
+        "enmax": 153,
+        "recommended": true
+    },
+    {
+        "element": "Cs",
+        "potcar_name": "Cs_sv",
+        "enmax": 220,
+        "recommended": true
+    },
+    {
+        "element": "Ba",
+        "potcar_name": "Ba_sv",
+        "enmax": 187,
+        "recommended": true
+    },
+    {
+        "element": "La",
+        "potcar_name": "La",
+        "enmax": 219,
+        "recommended": true
+    },
+    {
+        "element": "La",
+        "potcar_name": "La_s",
+        "enmax": 137,
+        "recommended": false
+    },
+    {
+        "element": "Ce",
+        "potcar_name": "Ce",
+        "enmax": 273,
+        "recommended": true
+    },
+    {
+        "element": "Ce",
+        "potcar_name": "Ce_h",
+        "enmax": 300,
+        "recommended": false
+    },
+    {
+        "element": "Ce",
+        "potcar_name": "Ce_3",
+        "enmax": 177,
+        "recommended": false
+    },
+    {
+        "element": "Pr",
+        "potcar_name": "Pr",
+        "enmax": 273,
+        "recommended": false
+    },
+    {
+        "element": "Pr",
+        "potcar_name": "Pr_3",
+        "enmax": 182,
+        "recommended": true
+    },
+    {
+        "element": "Nd",
+        "potcar_name": "Nd",
+        "enmax": 253,
+        "recommended": false
+    },
+    {
+        "element": "Nd",
+        "potcar_name": "Nd_3",
+        "enmax": 183,
+        "recommended": true
+    },
+    {
+        "element": "Pm",
+        "potcar_name": "Pm",
+        "enmax": 259,
+        "recommended": false
+    },
+    {
+        "element": "Pm",
+        "potcar_name": "Pm_3",
+        "enmax": 177,
+        "recommended": true
+    },
+    {
+        "element": "Sm",
+        "potcar_name": "Sm",
+        "enmax": 258,
+        "recommended": false
+    },
+    {
+        "element": "Sm",
+        "potcar_name": "Sm_3",
+        "enmax": 177,
+        "recommended": true
+    },
+    {
+        "element": "Eu",
+        "potcar_name": "Eu",
+        "enmax": 250,
+        "recommended": false
+    },
+    {
+        "element": "Eu",
+        "potcar_name": "Eu_2",
+        "enmax": 99,
+        "recommended": true
+    },
+    {
+        "element": "Eu",
+        "potcar_name": "Eu_3",
+        "enmax": 129,
+        "recommended": false
+    },
+    {
+        "element": "Gd",
+        "potcar_name": "Gd",
+        "enmax": 256,
+        "recommended": false
+    },
+    {
+        "element": "Gd",
+        "potcar_name": "Gd_3",
+        "enmax": 154,
+        "recommended": true
+    },
+    {
+        "element": "Tb",
+        "potcar_name": "Tb",
+        "enmax": 265,
+        "recommended": false
+    },
+    {
+        "element": "Tb",
+        "potcar_name": "Tb_3",
+        "enmax": 156,
+        "recommended": true
+    },
+    {
+        "element": "Dy",
+        "potcar_name": "Dy",
+        "enmax": 255,
+        "recommended": false
+    },
+    {
+        "element": "Dy",
+        "potcar_name": "Dy_3",
+        "enmax": 156,
+        "recommended": true
+    },
+    {
+        "element": "Ho",
+        "potcar_name": "Ho",
+        "enmax": 257,
+        "recommended": false
+    },
+    {
+        "element": "Ho",
+        "potcar_name": "Ho_3",
+        "enmax": 154,
+        "recommended": true
+    },
+    {
+        "element": "Er",
+        "potcar_name": "Er_2",
+        "enmax": 120,
+        "recommended": false
+    },
+    {
+        "element": "Er",
+        "potcar_name": "Er_3",
+        "enmax": 155,
+        "recommended": true
+    },
+    {
+        "element": "Er",
+        "potcar_name": "Er",
+        "enmax": 298,
+        "recommended": false
+    },
+    {
+        "element": "Tm",
+        "potcar_name": "Tm",
+        "enmax": 257,
+        "recommended": false
+    },
+    {
+        "element": "Tm",
+        "potcar_name": "Tm_3",
+        "enmax": 149,
+        "recommended": true
+    },
+    {
+        "element": "Yb",
+        "potcar_name": "Yb",
+        "enmax": 253,
+        "recommended": false
+    },
+    {
+        "element": "Yb",
+        "potcar_name": "Yb_2",
+        "enmax": 113,
+        "recommended": true
+    },
+    {
+        "element": "Lu",
+        "potcar_name": "Lu",
+        "enmax": 256,
+        "recommended": false
+    },
+    {
+        "element": "Lu",
+        "potcar_name": "Lu_3",
+        "enmax": 155,
+        "recommended": true
+    },
+    {
+        "element": "Hf",
+        "potcar_name": "Hf",
+        "enmax": 220,
+        "recommended": false
+    },
+    {
+        "element": "Hf",
+        "potcar_name": "Hf_pv",
+        "enmax": 220,
+        "recommended": true
+    },
+    {
+        "element": "Hf",
+        "potcar_name": "Hf_sv",
+        "enmax": 237,
+        "recommended": false
+    },
+    {
+        "element": "Ta",
+        "potcar_name": "Ta",
+        "enmax": 224,
+        "recommended": false
+    },
+    {
+        "element": "Ta",
+        "potcar_name": "Ta_pv",
+        "enmax": 224,
+        "recommended": true
+    },
+    {
+        "element": "W",
+        "potcar_name": "W",
+        "enmax": 223,
+        "recommended": false
+    },
+    {
+        "element": "W",
+        "potcar_name": "W_sv",
+        "enmax": 223,
+        "recommended": true
+    },
+    {
+        "element": "Re",
+        "potcar_name": "Re",
+        "enmax": 226,
+        "recommended": true
+    },
+    {
+        "element": "Re",
+        "potcar_name": "Re_pv",
+        "enmax": 226,
+        "recommended": false
+    },
+    {
+        "element": "Os",
+        "potcar_name": "Os",
+        "enmax": 228,
+        "recommended": true
+    },
+    {
+        "element": "Os",
+        "potcar_name": "Os_pv",
+        "enmax": 228,
+        "recommended": false
+    },
+    {
+        "element": "Ir",
+        "potcar_name": "Ir",
+        "enmax": 211,
+        "recommended": true
+    },
+    {
+        "element": "Pt",
+        "potcar_name": "Pt",
+        "enmax": 230,
+        "recommended": true
+    },
+    {
+        "element": "Pt",
+        "potcar_name": "Pt_pv",
+        "enmax": 295,
+        "recommended": false
+    },
+    {
+        "element": "Au",
+        "potcar_name": "Au",
+        "enmax": 230,
+        "recommended": true
+    },
+    {
+        "element": "Hg",
+        "potcar_name": "Hg",
+        "enmax": 233,
+        "recommended": true
+    },
+    {
+        "element": "Tl",
+        "potcar_name": "Tl",
+        "enmax": 90,
+        "recommended": false
+    },
+    {
+        "element": "Tl",
+        "potcar_name": "Tl_d",
+        "enmax": 237,
+        "recommended": true
+    },
+    {
+        "element": "Pb",
+        "potcar_name": "Pb",
+        "enmax": 98,
+        "recommended": false
+    },
+    {
+        "element": "Pb",
+        "potcar_name": "Pb_d",
+        "enmax": 238,
+        "recommended": true
+    },
+    {
+        "element": "Bi",
+        "potcar_name": "Bi",
+        "enmax": 105,
+        "recommended": false
+    },
+    {
+        "element": "Bi",
+        "potcar_name": "Bi_d",
+        "enmax": 243,
+        "recommended": true
+    },
+    {
+        "element": "Po",
+        "potcar_name": "Po",
+        "enmax": 160,
+        "recommended": false
+    },
+    {
+        "element": "Po",
+        "potcar_name": "Po_d",
+        "enmax": 265,
+        "recommended": true
+    },
+    {
+        "element": "At",
+        "potcar_name": "At",
+        "enmax": 161,
+        "recommended": true
+    },
+    {
+        "element": "Rn",
+        "potcar_name": "Rn",
+        "enmax": 151,
+        "recommended": true
+    },
+    {
+        "element": "Fr",
+        "potcar_name": "Fr_sv",
+        "enmax": 215,
+        "recommended": true
+    },
+    {
+        "element": "Ra",
+        "potcar_name": "Ra_sv",
+        "enmax": 237,
+        "recommended": true
+    },
+    {
+        "element": "Ac",
+        "potcar_name": "Ac",
+        "enmax": 172,
+        "recommended": true
+    },
+    {
+        "element": "Th",
+        "potcar_name": "Th",
+        "enmax": 247,
+        "recommended": true
+    },
+    {
+        "element": "Th",
+        "potcar_name": "Th_s",
+        "enmax": 169,
+        "recommended": false
+    },
+    {
+        "element": "Pa",
+        "potcar_name": "Pa",
+        "enmax": 252,
+        "recommended": true
+    },
+    {
+        "element": "Pa",
+        "potcar_name": "Pa_s",
+        "enmax": 193,
+        "recommended": false
+    },
+    {
+        "element": "U",
+        "potcar_name": "U",
+        "enmax": 253,
+        "recommended": true
+    },
+    {
+        "element": "U",
+        "potcar_name": "U_s",
+        "enmax": 209,
+        "recommended": false
+    },
+    {
+        "element": "Np",
+        "potcar_name": "Np",
+        "enmax": 254,
+        "recommended": true
+    },
+    {
+        "element": "Np",
+        "potcar_name": "Np_s",
+        "enmax": 208,
+        "recommended": false
+    },
+    {
+        "element": "Pu",
+        "potcar_name": "Pu",
+        "enmax": 254,
+        "recommended": true
+    },
+    {
+        "element": "Pu",
+        "potcar_name": "Pu_s",
+        "enmax": 208,
+        "recommended": false
+    },
+    {
+        "element": "Am",
+        "potcar_name": "Am",
+        "enmax": 256,
+        "recommended": true
+    },
+    {
+        "element": "Cm",
+        "potcar_name": "Cm",
+        "enmax": 258,
+        "recommended": true
+    }
+]

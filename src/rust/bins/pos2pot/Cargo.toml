@@ -1,0 +1,16 @@
+[package]
+name = "pos2pot"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+inquire = "0.6"
+csv = "1.1"
+home = "0.5.3"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+clap ={ version = "4.3", features = ["derive"] }
+paris = "1.5.13"
+corelib = { path = "../../libs/corelib" }
