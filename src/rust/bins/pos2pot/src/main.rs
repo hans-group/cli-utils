@@ -12,7 +12,7 @@ use std::{env, fs};
 
 use paris::Logger;
 
-/// Converts POSCAR to POTCAR.
+/// Generates POTCAR from POSCAR.
 /// Generated POTCAR will be written to the same directory as POSCAR.
 /// If the POTCAR file already exists, it will be overwritten.
 #[derive(Parser, Debug)]

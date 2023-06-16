@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import ase.io
+import click
 import inquirer
 import numpy as np
 from ase import Atoms
@@ -70,9 +71,14 @@ def animate_mode(coords, disp, scale, n_mesh=10):
     return frames
 
 
-if __name__ == "__main__":
-    atoms = ase.io.read("orca.xyz")
-    hess = read_hessian("orca.hess")
+@click.command(help="Animate a vibrational mode from ORCA calculation.")
+@click.option("-s", "--scale", default=1.0, help="Scale factor for displacements.")
+@click.option("-n", "--num_points", default=10, help="Number of points in the mesh.")
+@click.option("--xyz_file", default="orca.xyz", help="XYZ file to read.")
+@click.option("--hess_file", default="orca.hess", help="Hessian file to read.")
+def main(scale, num_points, xyz_file, hess_file):
+    atoms = ase.io.read(xyz_file)
+    hess = read_hessian(hess_file)
     ana = VibAnalysis(atoms, hess)
     ana._compute_vib_props()
     ana.displacements.shape, ana.vib_freqs_cm.shape, ana.force_constant.shape
@@ -97,7 +103,11 @@ if __name__ == "__main__":
     disp = ana.displacements[selected_idx]
 
     # Create a list of frames.
-    frames = animate_mode(coords, disp, scale=1.0)
+    frames = animate_mode(coords, disp, scale=scale, n_mesh=num_points)
     atomslist = [Atoms(species, frame) for frame in frames]
 
     ase.io.write(f"vibmode_{selected_freq:.2f}cm-1.xyz", atomslist, format="xyz")
+
+
+if __name__ == "__main__":
+    main()
