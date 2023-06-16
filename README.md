@@ -28,3 +28,16 @@ If it fails, reinstall the latest `rustup` and try again.
 - `qst`: Prettier version of `qst`
 
 See wiki for detailed usage.
+
+## For developers & contributors
+
+### Bash scripts
+
+- Write a command as function definition. 
+- If it is short, append to `src/bash/cli_utils_bash.sh`. Otherwise, write to separate file and add `source $source_dir/filename` to `cli_utils_bash.sh`.
+
+### Python scripts
+
+- In the directory `src/python`, **only executable scripts are allowed.** Do not put the library code in it.
+- The library codes should be placed in `src/python/lib`.
+- Check the errors with `flake8` and format the code with `black`.
