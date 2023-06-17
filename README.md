@@ -26,6 +26,7 @@ If it fails, reinstall the latest `rustup` and try again.
 - `pos2pot`: Generate `POTCAR` file from `POSCAR` file.
 - `ndstat`: Prettier version of `pestat`
 - `qst`: Prettier version of `qst`
+- `symmetrize_poscar`: Symmetrize POSCAR
 
 See wiki for detailed usage.
 
