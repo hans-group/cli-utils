@@ -7,7 +7,7 @@ mkdir -p bin
 
 # Copy resources
 echo "Copying resources..."
-cp -r resources bin/
+ln -sf ../resources bin/resources
 
 # Install bash functions
 echo "Installing bash functions..."
@@ -34,16 +34,17 @@ all_bins=$(find src/rust/bins -mindepth 1 -maxdepth 1 -type d -printf '%f\n')
 cargo build --release
 for bin in $all_bins; do
     echo "Installing $bin..."
-    cp "target/release/$bin" "bin/$bin"
+    ln -sf "../target/release/$bin" "bin/$bin"
 done
 
 # Install python scripts
 echo "Installing python scripts..."
-cp -r src/python/lib bin/
+# cp -r src/python/lib bin/
+ln -sf "../src/python/lib" "bin/lib"
 for file in src/python/*.py; do
     echo "Installing $file..."
     base=$(basename "$file")
-    cp "$file" "bin/${base%%.*}" # remove extension
+    ln -sf "../$file" "bin/${base%%.*}" # remove extension
 done
 
 # Add bin to PATH
