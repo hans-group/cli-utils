@@ -7,7 +7,7 @@ mkdir -p bin
 
 # Copy resources
 echo "Copying resources..."
-ln -sf ../resources bin/resources
+cp -r "resources" "bin/"
 
 # Install bash functions
 echo "Installing bash functions..."
@@ -39,8 +39,7 @@ done
 
 # Install python scripts
 echo "Installing python scripts..."
-# cp -r src/python/lib bin/
-ln -sf "../src/python/lib" "bin/lib"
+cp -r src/python/lib bin/
 for file in src/python/*.py; do
     echo "Installing $file..."
     base=$(basename "$file")
