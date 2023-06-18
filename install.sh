@@ -1,5 +1,4 @@
 #!/bin/bash
-
 vercomp () {
     if [[ $1 == $2 ]]
     then
@@ -37,8 +36,9 @@ repo_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # If rustc is not installed, error
 if ! command -v rustc &> /dev/null
 then
-    echo "rustc could not be found. Please install rustc."
-    exit
+    echo "rustc could not be found. Installing..."
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+    source "$HOME/.cargo/env"
 fi
 
 # Check rustc version
@@ -48,11 +48,20 @@ rustc_version=$(rustc --version | awk '{print $2}')
 vercomp "$rustc_version" "1.64.0"
 if [ $? = 2 ]
 then
-    echo "rustc version is $rustc_version. Please update rustc to 1.64.0 or newer."
-    exit
+    echo "rustc version is $rustc_version. Updating rustc to 1.64.0 or newer."
+    # Install new one if $HOME/.cargo/bin/rustup does not exist
+    if ! command -v "$HOME/.cargo/bin/rustup" &> /dev/null
+    then
+        echo "rustup is not in user directory. Installing one in $HOME/.cargo ..."
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+        source "$HOME/.cargo/env"
+    # Otherwise, update
+    else
+        rustup update
+    fi
 fi
 
-
+set -e
 # make `bin` dir if not exists
 mkdir -p bin
 
