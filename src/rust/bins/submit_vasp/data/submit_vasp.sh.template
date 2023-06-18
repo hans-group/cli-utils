@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH -J { job_name }
+#SBATCH -e stderr-%j.log
+#SBATCH -p { partition }
+#SBATCH -N { num_nodes }
+#SBATCH --ntasks-per-node={ num_tasks_per_node }
+{{ if use_nodelist }}#SBATCH --nodelist={ nodelist }{{ endif }}
+{{ if use_exclude }}#SBATCH --exclude={ exclude }{{ endif }}
+
+module purge
+module add compiler/2022.1.0
+module add mkl/2022.1.0
+module add mpi/2021.6.0
+
+mpirun -np $SLURM_NTASKS { vasp_bin } > stdout.log

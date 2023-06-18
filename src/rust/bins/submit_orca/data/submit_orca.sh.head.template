@@ -1,0 +1,11 @@
+#!/bin/bash
+#SBATCH -J { job_name }
+#SBATCH -p { partition }
+#SBATCH -N 1
+#SBATCH --ntasks-per-node { num_tasks_per_node }
+#SBATCH -e stderr-%j.log
+#SBATCH -o stdout-%j.log    # output and error file name
+{{ if use_nodelist }}
+#SBATCH -w, --nodelist={ node }
+{{ endif }}
+

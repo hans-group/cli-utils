@@ -20,6 +20,7 @@ If it fails, reinstall the latest `rustup` and try again.
 - `gotojob`: Go to SLURM job submission directory
 - `animate_vibmode_orca`: Animate the normal mode of molecule to `.xyz` file from orca frequency calculation.
 - `submit_orca`: Submit ORCA job to SLURM in one line
+- `submit_vasp`: Submit VASP job to SLURM in one line
 - `vasp_mdstat`: Plot potential/kinetic/total energy and temperature profile of VASP MD run.
 - `check_ef_vasp`: Check convergence of energy and force from VASP geometry optimization run.
 - `kpointsgen`: Generate `KPOINTS` file for VASP calculation, either from explicit grid or from density of k-points.

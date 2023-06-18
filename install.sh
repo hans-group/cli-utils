@@ -5,6 +5,11 @@ repo_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # make `bin` dir if not exists
 mkdir -p bin
 
+# Remove all links in bin
+echo "Removing all links in bin..."
+find bin -type l -delete
+
+
 # Copy resources
 echo "Copying resources..."
 cp -r "resources" "bin/"
