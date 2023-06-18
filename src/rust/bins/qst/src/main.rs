@@ -61,8 +61,13 @@ fn print_table(user: Option<&str>, num_print: Option<usize>) {
     }
     // Print only latest `num_print` jobs.
     let n_row = rows.len();
-    for row in rows.into_iter().rev().take(num_print.unwrap_or(n_row)) {
+    let mut skipcount = n_row - num_print.unwrap_or(n_row);
+    for row in rows.into_iter().take(num_print.unwrap_or(n_row)) {
+        if skipcount == num_print.unwrap_or(n_row) {
+            continue;
+        }
         table.add_row(row);
+        skipcount += 1;
     }
     println!("{}", table);
 }
