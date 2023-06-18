@@ -57,3 +57,7 @@ if __name__ == "__main__":
     plt.plot(results["KE"] + results["PE"])
     plt.tight_layout()
     plt.savefig("Etot.png", dpi=300)
+
+    # Save data
+    data = np.c_[results["T"], results["PE"], results["KE"]]
+    np.savetxt("data.txt", data)
