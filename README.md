@@ -10,7 +10,7 @@ First, make sure that `cargo` is installed.
 ```
 git clone https://github.com/hans-group/cli-utils
 cd cli-utils
-bash install.sh
+./install.sh
 ```
 
 If it fails, reinstall the latest `rustup` and try again.
