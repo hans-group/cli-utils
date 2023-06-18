@@ -45,7 +45,8 @@ fi
 echo "Checking rustc version..."
 rustc_version=$(rustc --version | awk '{print $2}')
 # if version older than 1.64.0, update
-if vercomp "$rustc_version" "1.64.0" == 2
+vercomp "$rustc_version" "1.64.0"
+if [ $? = 2 ]
 then
     echo "rustc version is $rustc_version. Please update rustc to 1.64.0 or newer."
     exit
