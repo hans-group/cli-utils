@@ -60,4 +60,4 @@ if __name__ == "__main__":
 
     # Save data
     data = np.c_[results["T"], results["PE"], results["KE"]]
-    np.savetxt("data.txt", data)
+    np.savetxt("data.txt", data, header="T      PE      KE")
