@@ -18,7 +18,7 @@ struct Context {
     num_tasks_per_node: usize,
     node: String,
     use_nodelist: bool,
-    remove_tdir: bool,
+    keep_tdir: bool,
 }
 
 #[derive(Parser)]
@@ -41,7 +41,7 @@ struct Args {
     node: Option<String>,
     /// Remove temporary directory.
     #[arg(short, long)]
-    remove_tdir: bool,
+    keep_tdir: bool,
     /// Do not submit job
     #[arg(long)]
     dry: bool,
@@ -80,7 +80,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         num_tasks_per_node: args.num_tasks_per_node,
         node,
         use_nodelist,
-        remove_tdir: args.remove_tdir,
+        keep_tdir: args.keep_tdir,
     };
     let rendered = template.render("slurm_script", &context)?;
     let mut slurm_script = std::fs::File::create("submit_orca.sh")?;

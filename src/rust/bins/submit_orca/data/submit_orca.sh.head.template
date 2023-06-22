@@ -8,4 +8,8 @@
 {{ if use_nodelist }}
 #SBATCH -w, --nodelist={ node }
 {{ endif }}
-
+{{ if keep_tdir }}
+KEEPTDIR='True'
+{{ else }}
+KEEPTDIR='False'
+{{ endif }}
