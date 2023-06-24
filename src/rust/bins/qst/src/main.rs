@@ -1,24 +1,58 @@
-use qst::Job;
+use qst::{Job, State};
 
 use clap::Parser;
 use comfy_table::modifiers::UTF8_SOLID_INNER_BORDERS;
 use comfy_table::presets::UTF8_FULL;
-use comfy_table::*;
+use comfy_table::{Attribute, Cell, ContentArrangement, Table};
+use std::cmp::Ordering;
 use std::str::FromStr;
 
-fn print_table(user: Option<&str>, num_print: Option<usize>) {
-    let user_from_env = std::env::var("USER").expect("No USER found.");
-    let user = match user {
-        Some(user) => user,
-        None => user_from_env.as_str(),
-    };
-    let jobinfo = {
+fn get_jobs(user: &str) -> Vec<Job> {
+    let jobinfo: String = {
         let out = std::process::Command::new("sh")
             .args(["-c", "scontrol show job"])
             .output()
             .unwrap()
             .stdout;
         String::from_utf8(out).unwrap()
+    };
+
+    jobinfo
+        .split("\n\n")
+        .filter(|&x| !x.is_empty())
+        .map(|x| Job::from_str(x).unwrap())
+        .filter(|x| x.username == user)
+        .collect()
+}
+
+fn print_table(user: Option<&str>, num_print: Option<i64>, status: &str) {
+    let user_from_env = std::env::var("USER").expect("No USER found.");
+    let user = match user {
+        Some(user) => user,
+        None => user_from_env.as_str(),
+    };
+    // Filter jobs
+    let jobs: Vec<Job> = {
+        let all_jobs = get_jobs(user);
+        let jobs = match State::from_str(status) {
+            Ok(state) => all_jobs
+                .into_iter()
+                .filter(|job| job.state == state)
+                .collect(),
+            Err(_) => all_jobs,
+        };
+
+        let n_jobs = jobs.len();
+        let num_print = num_print.unwrap_or(n_jobs as i64);
+        let jobs = match num_print.cmp(&0) {
+            Ordering::Equal => jobs.into_iter().collect(),
+            Ordering::Less => jobs
+                .into_iter()
+                .skip((n_jobs as i64 + num_print) as usize)
+                .collect(),
+            Ordering::Greater => jobs.into_iter().take(num_print as usize).collect(),
+        };
+        jobs
     };
 
     let mut table = Table::new();
@@ -37,38 +71,23 @@ fn print_table(user: Option<&str>, num_print: Option<usize>) {
             Cell::new("Elapsed\ntime").add_attribute(Attribute::Bold),
         ]);
 
-    let mut rows = vec![];
-    for l in jobinfo.split("\n\n").filter(|&x| !x.is_empty()) {
-        let job: Job = Job::from_str(l).unwrap();
+    for job in jobs {
         if job.username == user {
-            let color = match job.state.as_str() {
-                "RUNNING" => Color::Grey,
-                "COMPLETED" => Color::Green,
-                _ => Color::Reset,
-            };
-
+            let color = job.state.color();
             let row = vec![
                 Cell::new(job.id).fg(color),
                 Cell::new(job.jobname).fg(color),
-                Cell::new(job.state).fg(color),
+                Cell::new(job.state.to_str()).fg(color),
                 Cell::new(job.partition).fg(color),
                 Cell::new(job.numnodes).fg(color),
                 Cell::new(job.numtasks).fg(color),
                 Cell::new(job.runtime).fg(color),
             ];
-            rows.push(row);
+
+            table.add_row(row);
         }
     }
-    // Print only latest `num_print` jobs.
-    let n_row = rows.len();
-    let mut skipcount = n_row - num_print.unwrap_or(n_row);
-    for row in rows.into_iter().take(num_print.unwrap_or(n_row)) {
-        if skipcount == num_print.unwrap_or(n_row) {
-            continue;
-        }
-        table.add_row(row);
-        skipcount += 1;
-    }
+
     println!("{}", table);
 }
 
@@ -80,11 +99,14 @@ struct Args {
     #[arg(short, long, default_value = None)]
     user: Option<String>,
     /// Number of jobs to be printed. Defaults to all jobs.
-    #[arg(short, long, default_value = None)]
-    num_print: Option<usize>,
+    #[arg(short, long, default_value = None, allow_hyphen_values = true)]
+    num_print: Option<i64>,
+    /// Select status
+    #[arg(short, long, default_value = "all")]
+    status: String,
 }
 
 fn main() {
     let args = Args::parse();
-    print_table(args.user.as_deref(), args.num_print);
+    print_table(args.user.as_deref(), args.num_print, &args.status);
 }

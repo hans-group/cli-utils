@@ -1,3 +1,4 @@
+use comfy_table::Color;
 use lazy_static::lazy_static;
 use regex::Regex;
 use std::error::Error;
@@ -20,7 +21,7 @@ pub struct Job {
     pub id: String,
     pub jobname: String,
     pub username: String,
-    pub state: String,
+    pub state: State,
     pub partition: String,
     pub numnodes: String,
     pub numtasks: String,
@@ -46,7 +47,7 @@ impl FromStr for Job {
             id,
             jobname,
             username,
-            state,
+            state: State::from_str(&state)?,
             partition,
             numnodes,
             numtasks,
@@ -63,6 +64,52 @@ impl Job {
         match val {
             Some(s) => s.to_string(),
             None => String::from("None"),
+        }
+    }
+}
+
+#[derive(Debug, PartialEq)]
+pub enum State {
+    Running,
+    Completed,
+    Pending,
+    Failed,
+    Cancelled,
+}
+
+impl FromStr for State {
+    type Err = Box<dyn Error>;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "RUNNING" | "R" => Ok(State::Running),
+            "COMPLETED" | "C" => Ok(State::Completed),
+            "PENDING" | "P" | "Q" => Ok(State::Pending),
+            "FAILED" | "F" => Ok(State::Failed),
+            "CANCELLED" | "c" => Ok(State::Cancelled),
+            // Return error if state is not valid
+            _ => Err("Invalid state".into()),
+        }
+    }
+}
+
+impl State {
+    pub fn to_str(&self) -> &str {
+        match self {
+            State::Running => "RUNNING",
+            State::Completed => "COMPLETED",
+            State::Pending => "PENDING",
+            State::Failed => "FAILED",
+            State::Cancelled => "CANCELLED",
+        }
+    }
+    pub fn color(&self) -> Color {
+        match self {
+            State::Running => Color::Grey,
+            State::Completed => Color::Green,
+            State::Pending => Color::Reset,
+            State::Failed => Color::Red,
+            State::Cancelled => Color::Yellow,
         }
     }
 }
