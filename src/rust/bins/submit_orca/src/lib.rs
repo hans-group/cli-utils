@@ -13,7 +13,11 @@ fn get_all_partitions() -> Vec<String> {
 
 pub fn check_partition(partition: &str) -> Result<String, String> {
     let partitions = get_all_partitions();
-    match partitions.contains(&partition.to_string()) {
+    let given_partitions = partition.split(",").collect::<Vec<&str>>();
+    match given_partitions
+        .iter()
+        .all(|x| partitions.contains(&x.to_string()))
+    {
         true => Ok(partition.to_string()),
         false => Err(format!(
             "Partition {} does not exist. Available partitions are: {:?}",
