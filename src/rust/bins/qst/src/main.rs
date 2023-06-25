@@ -32,7 +32,7 @@ fn print_table(user: Option<&str>, num_print: Option<i64>, status: &str) {
         None => user_from_env.as_str(),
     };
     // Filter jobs
-    let jobs: Vec<Job> = {
+    let (n_jobs, jobs): (usize, Vec<Job>) = {
         let all_jobs = get_jobs(user);
         let jobs = match State::from_str(status) {
             Ok(state) => all_jobs
@@ -52,7 +52,7 @@ fn print_table(user: Option<&str>, num_print: Option<i64>, status: &str) {
                 .collect(),
             Ordering::Greater => jobs.into_iter().take(num_print as usize).collect(),
         };
-        jobs
+        (n_jobs, jobs)
     };
 
     let mut table = Table::new();
@@ -89,6 +89,7 @@ fn print_table(user: Option<&str>, num_print: Option<i64>, status: &str) {
     }
 
     println!("{}", table);
+    println!("Total {} jobs", n_jobs);
 }
 
 /// Print status of jobs on the HPC cluster.
