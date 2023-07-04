@@ -1,5 +1,6 @@
 use check_ef_vasp::{read_file, read_max_forces};
 use clap::Parser;
+use sigpipe;
 
 use corelib::parser::oszicar;
 use std::fmt::Write as _;
@@ -24,6 +25,7 @@ pub struct Options {
     pub write_results: bool,
 }
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    sigpipe::reset();
     let opts = Options::parse();
     let mut log = paris::Logger::new();
 

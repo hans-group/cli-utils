@@ -12,3 +12,4 @@ paris = "1.5.13"
 rayon = "1.5.3"
 regex = "1.6"
 corelib = { path = "../../libs/corelib" }
+sigpipe = "0.1.3"
