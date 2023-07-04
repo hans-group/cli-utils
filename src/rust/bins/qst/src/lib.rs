@@ -83,7 +83,7 @@ impl FromStr for State {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
             "RUNNING" | "R" => Ok(State::Running),
-            "COMPLETED" | "C" => Ok(State::Completed),
+            "COMPLETED" | "COMPLETING" | "C" => Ok(State::Completed),
             "PENDING" | "P" | "Q" => Ok(State::Pending),
             "FAILED" | "F" => Ok(State::Failed),
             "CANCELLED" | "c" => Ok(State::Cancelled),
