@@ -2,7 +2,6 @@
 
 Useful command-line utilities for research in HANS group.
 
-
 ## Installation
 
 First, make sure that `cargo` is installed.
@@ -28,6 +27,7 @@ If it fails, reinstall the latest `rustup` and try again.
 - `ndstat`: Prettier version of `pestat`
 - `qst`: Prettier version of `qst`
 - `symmetrize_poscar`: Symmetrize POSCAR
+- `vasp_set`: Generate VASP inputs from `POSCAR` file and `input_params.toml`. Example of `input_params.toml` can be found in wiki.
 
 See wiki for detailed usage.
 
@@ -35,7 +35,7 @@ See wiki for detailed usage.
 
 ### Bash scripts
 
-- Write a command as function definition. 
+- Write a command as function definition.
 - If it is short, append to `src/bash/cli_utils_bash.sh`. Otherwise, write to separate file and add `source $source_dir/filename` to `cli_utils_bash.sh`.
 
 ### Python scripts
