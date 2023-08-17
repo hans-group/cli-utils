@@ -1,0 +1,56 @@
+[incar]
+algo = "Fast"
+ediff = 1e-5
+ediffg = -0.02
+encut = 520
+gga = "RP"
+ibrion = 2
+isif = 3
+ismear = 0
+ispin = 2
+isym = 0
+ivdw = 11
+kpar = 4
+laechg = false
+lcharg = false
+lreal = false
+lwave = false
+ncore = 4
+nelm = 120
+nsw = 300
+prec = "Normal"
+sigma = 0.05
+
+[kpoints]
+mesh = [11, 11, 11]
+method = "gamma"
+
+[potcar]
+Co = "Co"
+H = "H"
+Mn = "Mn_pv"
+O = "O"
+
+[incar.magmom]
+Co = 2
+H = 0
+Mn = 2
+O = 0
+
+[incar.ldauj]
+Co = 0
+H = 0
+Mn = 0
+O = 0
+
+[incar.ldauu]
+Co = 3.32
+H = 0
+Mn = 3.9
+O = 0
+
+[incar.ldaul]
+Co = 2
+H = -1
+Mn = 2
+O = -1
