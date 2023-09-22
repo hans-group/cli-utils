@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -J { job_name }
-#SBATCH -e stderr-%j.log
+#SBATCH -e { log_prefix }-%j.log
 #SBATCH -p { partition }
 #SBATCH -N { num_nodes }
 #SBATCH --ntasks-per-node={ num_tasks_per_node }

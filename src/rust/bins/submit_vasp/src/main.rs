@@ -21,6 +21,7 @@ struct Context {
     exclude: String,
     use_exclude: bool,
     vasp_bin: String,
+    log_prefix: String,
 }
 
 #[derive(Parser)]
@@ -50,6 +51,10 @@ struct Args {
     /// VASP binary name. Default is 6.3.2/std
     #[arg(long, default_value = "6.3.2/std")]
     vasp_bin: String,
+    /// Prefix to sdterr log file. Default is stderr.
+    /// The log file name will be prefix-job_number.log
+    #[arg(long, default_value = "stderr")]
+    log_prefix: String,
     /// Do not submit job
     #[arg(long)]
     dry: bool,
@@ -108,6 +113,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         exclude,
         use_exclude,
         vasp_bin,
+        log_prefix: args.log_prefix
     };
     let rendered = template.render("slurm_script", &context)?;
     let mut slurm_script = std::fs::File::create("submit_vasp.sh")?;
