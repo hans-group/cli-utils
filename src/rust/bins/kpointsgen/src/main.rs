@@ -35,7 +35,7 @@ fn parse_grid_scheme(s: &str) -> Result<KpointsGridScheme, String> {
     }
 }
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
     // Write the k-points grid to the file.
     match (args.ngrids, args.density) {
@@ -48,7 +48,7 @@ fn main() {
             std::process::exit(1);
         }
         (Some(ngrids), None) => {
-            let kpoints = Kpoints::new(args.grid_scheme, [ngrids[0], ngrids[1], ngrids[2]]);
+            let kpoints = Kpoints::new(args.grid_scheme, [ngrids[0], ngrids[1], ngrids[2]])?;
             let mut file = File::create(TARGET_FILLEPATH).expect("Unable to create file");
             file.write_all(kpoints.to_string().as_bytes())
                 .expect("Unable to write data");
@@ -61,4 +61,5 @@ fn main() {
                 .expect("Unable to write data");
         }
     }
+    Ok(())
 }

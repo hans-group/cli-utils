@@ -6,6 +6,8 @@ use thiserror::Error;
 pub enum KpointsError {
     #[error("Unknown scheme {0}.")]
     UnknownScheme(String),
+    #[error("Zero mesh is not allow for k-points.")]
+    ZeroMesh(String),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -58,8 +60,15 @@ impl Kpoints {
         }
     }
 
-    pub fn new(scheme: KpointsGridScheme, mesh: [u32; 3]) -> Kpoints {
-        Kpoints { scheme, mesh }
+    pub fn new(scheme: KpointsGridScheme, mesh: [u32; 3]) -> Result<Kpoints, KpointsError> {
+        for m in mesh {
+            if m == 0 {
+                return Err(KpointsError::ZeroMesh(
+                    "Zero mesh is not allow for k-points.".to_string(),
+                ));
+            }
+        }
+        Ok(Kpoints { scheme, mesh })
     }
 
     pub fn from_density(scheme: KpointsGridScheme, density: f64, lattice: &Lattice) -> Kpoints {
@@ -68,9 +77,9 @@ impl Kpoints {
         let b = reciprocal_lattice_params.b;
         let c = reciprocal_lattice_params.c;
 
-        let num_ka = (a * density).round() as u32;
-        let num_kb = (b * density).round() as u32;
-        let num_kc = (c * density).round() as u32;
+        let num_ka = std::cmp::max(1, (a * density).round() as u32); // Ensure at least 1 k-point
+        let num_kb = std::cmp::max(1, (b * density).round() as u32);
+        let num_kc = std::cmp::max(1, (c * density).round() as u32);
         let mesh = [num_ka, num_kb, num_kc];
         Kpoints { scheme, mesh }
     }
@@ -95,7 +104,7 @@ Direct
 ";
     #[test]
     fn test_kpoints() {
-        let kpoints = Kpoints::new(KpointsGridScheme::Gamma, [3, 11, 7]);
+        let kpoints = Kpoints::new(KpointsGridScheme::Gamma, [3, 11, 7]).unwrap();
         println!("{}", kpoints);
         assert_eq!(
             kpoints.to_string(),
