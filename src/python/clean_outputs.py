@@ -6,7 +6,7 @@ import click
 AVAIL_MODE = ["vasp"]
 
 
-@click.command(help="Clean up the outpus of the simulation results")
+@click.command(help="Clean up the outputs of the simulation results")
 @click.argument("mode", default="vasp")
 def main(mode: str):
     if mode not in AVAIL_MODE:
