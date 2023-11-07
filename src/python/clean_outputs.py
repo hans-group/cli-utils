@@ -3,16 +3,16 @@ import os
 
 import click
 
-AVAIL_MODE = ["vasp"]
+AVAILABLE_MODES = ["vasp"]
 
 
 @click.command(help="Clean up the outputs of the simulation results")
 @click.argument("mode", default="vasp")
 def main(mode: str):
-    if mode not in AVAIL_MODE:
+    if mode not in AVAILABLE_MODES:
         click.echo(
             "Error: Unsupported mode. Supported modes are: {}".format(
-                ", ".join(AVAIL_MODE)
+                ", ".join(AVAILABLE_MODES)
             )
         )
         return
