@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import os
+import sys
 
 import click
 
@@ -16,7 +17,7 @@ def main(mode: str):
                 ", ".join(AVAILABLE_MODES)
             )
         )
-        return
+        sys.exit(1)
 
     if mode == "vasp":
         file_list = [
