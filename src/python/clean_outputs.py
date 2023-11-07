@@ -9,6 +9,7 @@ AVAILABLE_MODES = ["vasp"]
 @click.command(help="Clean up the outputs of the simulation results")
 @click.argument("mode", default="vasp")
 def main(mode: str):
+    mode = mode.strip().lower()
     if mode not in AVAILABLE_MODES:
         click.echo(
             "Error: Unsupported mode. Supported modes are: {}".format(
