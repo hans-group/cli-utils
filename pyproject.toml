@@ -1,5 +1,5 @@
-[tools.ruff]
+[tool.ruff]
 max-line-length = 120
 
-[tools.black]
+[tool.black]
 line-length = 120

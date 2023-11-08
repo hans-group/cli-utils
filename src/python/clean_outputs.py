@@ -1,26 +1,41 @@
 #!/usr/bin/env python
 import os
-
+import sys
+import glob
 import click
 
-AVAIL_MODE = ["vasp"]
+AVAILABLE_MODES = ["vasp"]
 
 
-@click.command(help="Clean up the outpus of the simulation results")
+def remove_matched_files(pattern: str, dry_run: bool = False):
+    """Removes the files that match the pattern
+    # ex) */file.txt, file*.txt, file.txt, ...
+    """
+
+    for f in glob.glob(pattern):
+        if dry_run:
+            click.echo("Dry run: will remove {}".format(f))
+        else:
+            os.remove(f)
+
+
+@click.command(help="Clean up the outputs of the simulation results")
 @click.argument("mode", default="vasp")
-def main(mode: str):
-    if mode not in AVAIL_MODE:
-        click.echo(
-            "Error: Unsupported mode. Supported modes are: {}".format(
-                ", ".join(AVAIL_MODE)
-            )
-        )
-        return
+@click.option("--keep-log", is_flag=True, help="Keep the log files.")
+@click.option("--keep-xml", is_flag=True, help="Keep the xml files (only for vasp).")
+@click.option("--keep-chgcar", is_flag=True, help="Keep the CHG and CHGCAR files (only for vasp).")
+@click.option("--keep-wavecar", is_flag=True, help="Keep the WAVECAR files (only for vasp).")
+@click.option(
+    "--dry-run", is_flag=True, help="Dry run. (only shows the files to be removed and does not remove them actually)"
+)
+def main(mode: str, keep_log: bool, keep_xml: bool, keep_chgcar: bool, keep_wavecar: bool, dry_run: bool):
+    mode = mode.strip().lower()
+    if mode not in AVAILABLE_MODES:
+        click.echo("Error: Unsupported mode. Supported modes are: {}".format(", ".join(AVAILABLE_MODES)))
+        sys.exit(1)
 
     if mode == "vasp":
         file_list = [
-            "CHG",
-            "CHGCAR",
             "CONTCAR",
             "DOSCAR",
             "EIGENVAL",
@@ -29,19 +44,26 @@ def main(mode: str):
             "OUTCAR",
             "PCDAT",
             "REPORT",
-            "stdout.log",
-            "vasprun.xml",
-            "WAVECAR",
             "XDATCAR",
             "vaspout.h5",
         ]
-        for f in file_list:
-            if os.path.isfile(f):
-                os.remove(f)
-            else:
-                pass
-        os.system("rm slurm-*")
-        os.system("rm stderr-*")
+        # Vasp specific options
+        if not keep_xml:
+            file_list.append("./*.xml")
+        if not keep_chgcar:
+            file_list.append("CHG")
+            file_list.append("CHGCAR")
+        if not keep_wavecar:
+            file_list.append("WAVECAR")
+
+    # Global options
+    if not keep_log:
+        file_list.append("./*.log")
+        file_list.append("./*.out")
+
+    # Remove the files
+    for f in file_list:
+        remove_matched_files(f, dry_run=dry_run)
 
 
 if __name__ == "__main__":
