@@ -33,9 +33,10 @@ def main(mode: str, keep_log: bool, keep_xml: bool, keep_chgcar: bool, keep_wave
     if mode not in AVAILABLE_MODES:
         click.echo("Error: Unsupported mode. Supported modes are: {}".format(", ".join(AVAILABLE_MODES)))
         sys.exit(1)
-
+    
+    file_list = []
     if mode == "vasp":
-        file_list = [
+        file_list += [
             "CONTCAR",
             "DOSCAR",
             "EIGENVAL",
