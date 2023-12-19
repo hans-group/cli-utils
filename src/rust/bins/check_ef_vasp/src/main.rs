@@ -1,8 +1,7 @@
-use check_ef_vasp::{read_file, read_max_forces};
+use check_ef_vasp::{read_from_dir, read_from_vaspout};
 use clap::Parser;
 use sigpipe;
 
-use corelib::parser::oszicar;
 use std::fmt::Write as _;
 use std::fs::File;
 use std::io::Write;
@@ -24,31 +23,21 @@ pub struct Options {
     #[arg(short = 'w', long, action)]
     pub write_results: bool,
 }
+
+fn vaspout_exists(dir: &str) ->bool {
+    let dir = std::path::Path::new(dir);
+    let path = dir.join("vaspout.h5");
+    path.exists() 
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     sigpipe::reset();
     let opts = Options::parse();
-    let mut log = paris::Logger::new();
 
-    let dir = std::path::Path::new(&opts.dir);
-    let poscar = read_file(&dir.join("POSCAR"))?;
-    let oszicar = read_file(&dir.join("OSZICAR"))?;
-
-    // Read max forces
-    let max_forces = match opts.no_force {
-        true => None,
-        false => {
-            let outcar = read_file(&dir.join("OUTCAR"))?;
-            Some(read_max_forces(&poscar, &outcar))
-        }
+    let (energies, max_forces) = match vaspout_exists(&opts.dir) {
+        true => read_from_vaspout(&opts.dir, !opts.no_force)?,
+        false => read_from_dir(&opts.dir, !opts.no_force)?,
     };
-
-    // Read energies from oszicar
-    let energies = oszicar::read_energies(&oszicar);
-    if energies.is_empty() {
-        log.error("No SCF loop found.");
-        std::process::exit(1);
-    }
-
     // Calculate relative energies
     let rel_e: &Vec<f64> = &energies.iter().map(|e| e - energies[0]).collect();
     let d_e: Vec<f64> = {
@@ -87,7 +76,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         lines.push(line);
     }
     if opts.write_results {
-        let mut file = File::create(&dir.join("convergence.dat"))?;
+        let mut file = File::create(std::path::Path::new(&opts.dir).join("convergence.dat"))?;
         file.write_all(header.as_bytes())?;
         file.write_all(b"\n")?;
         file.write_all(lines.join("\n").as_bytes())?;
