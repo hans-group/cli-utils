@@ -44,11 +44,11 @@ fi
 # Check rustc version
 echo "Checking rustc version..."
 rustc_version=$(rustc --version | awk '{print $2}')
-# if version older than 1.64.0, update
-vercomp "$rustc_version" "1.64.0"
+# if version older than 1.74.0, update
+vercomp "$rustc_version" "1.74.0"
 if [ $? = 2 ]
 then
-    echo "rustc version is $rustc_version. Updating rustc to 1.64.0 or newer."
+    echo "rustc version is $rustc_version. Updating rustc to 1.74.0 or newer."
     # Install new one if $HOME/.cargo/bin/rustup does not exist
     if ! command -v "$HOME/.cargo/bin/rustup" &> /dev/null
     then
