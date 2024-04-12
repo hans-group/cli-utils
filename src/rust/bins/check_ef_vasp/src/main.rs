@@ -25,12 +25,6 @@ pub struct Options {
     pub write_results: bool,
 }
 
-fn vaspout_exists(dir: &str) -> bool {
-    let dir = std::path::Path::new(dir);
-    let path = dir.join("vaspout.h5");
-    path.exists()
-}
-
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     sigpipe::reset();
     let opts = Options::parse();
