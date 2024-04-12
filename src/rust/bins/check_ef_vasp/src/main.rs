@@ -2,6 +2,7 @@ use check_ef_vasp::{read_from_dir, read_from_vaspout};
 use clap::Parser;
 use sigpipe;
 
+use anyhow::Result;
 use std::fmt::Write as _;
 use std::fs::File;
 use std::io::Write;
@@ -24,19 +25,20 @@ pub struct Options {
     pub write_results: bool,
 }
 
-fn vaspout_exists(dir: &str) ->bool {
+fn vaspout_exists(dir: &str) -> bool {
     let dir = std::path::Path::new(dir);
     let path = dir.join("vaspout.h5");
-    path.exists() 
+    path.exists()
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     sigpipe::reset();
     let opts = Options::parse();
 
-    let (energies, max_forces) = match vaspout_exists(&opts.dir) {
-        true => read_from_vaspout(&opts.dir, !opts.no_force)?,
-        false => read_from_dir(&opts.dir, !opts.no_force)?,
+    // Try to read from vaspout.h5 and if it fails, read from OUTCAR
+    let (energies, max_forces) = match read_from_vaspout(&opts.dir, !opts.no_force) {
+        Ok((energies, max_forces)) => (energies, max_forces),
+        Err(_) => read_from_dir(&opts.dir, !opts.no_force)?,
     };
     // Calculate relative energies
     let rel_e: &Vec<f64> = &energies.iter().map(|e| e - energies[0]).collect();
