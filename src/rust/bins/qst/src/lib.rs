@@ -6,7 +6,7 @@ use std::str::FromStr;
 
 lazy_static! {
     static ref ID_REGEX: Regex = Regex::new(r"JobId=\d+").unwrap();
-    static ref JOBNAME_REGEX: Regex = Regex::new(r"JobName=[/\w\-_\d.]+").unwrap();
+    static ref JOBNAME_REGEX: Regex = Regex::new(r"JobName=[*/\w\-_\d.]+").unwrap();
     static ref USERNAME_REGEX: Regex = Regex::new(r"UserId=\w+").unwrap();
     static ref STATE_REGEX: Regex = Regex::new(r"JobState=\w+").unwrap();
     static ref PARTITION_REGEX: Regex = Regex::new(r"Partition=\w+").unwrap();
