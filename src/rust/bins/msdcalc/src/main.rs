@@ -4,6 +4,18 @@ use extxyz::{read_xyz_frames, Info, RawAtoms};
 use msdcalc::calculate_msd;
 use ndarray::prelude::*;
 use std::io::Write;
+use paris;
+
+const LOGO: &str = r#"
+                   _           _      
+ _ __ ___  ___  __| | ___ __ _| | ___ 
+| '_ ` _ \/ __|/ _` |/ __/ _` | |/ __|
+| | | | | \__ \ (_| | (_| (_| | | (__ 
+|_| |_| |_|___/\__,_|\___\__,_|_|\___|
+
+version 0.1.0 by Minjoon Hong
+
+"#;
 
 #[derive(Parser)]
 #[command(about = "Calculate the mean square displacement", version, author)]
@@ -32,7 +44,10 @@ pub struct Options {
 }
 
 fn main() {
+    print!("{}", LOGO);
     let opts = Options::parse();
+    let mut logger = paris::Logger::new();
+    logger.info(format!("Reading {}...", opts.input));
     let frames = read_extxyz(&opts.input, Some(opts.skip_frames), None, Some(opts.stride)).unwrap();
     let cell = match &frames[0].cell {
         Some(cell) => cell.clone(),
@@ -46,8 +61,10 @@ fn main() {
         positions
     };
     let symbols = frames[0].symbols.clone();
-    println!("Number of selected frames: {}", positions.dim().0);
-    println!("Calculating MSD for species: {:?}", opts.species);
+
+    logger.info(format!("Number of selected frames: {}", positions.dim().0));
+    logger.info(format!("Calculating MSD for species: {:?}", opts.species));
+    
     let (times, msd) = calculate_msd(
         positions,
         &cell,
@@ -58,10 +75,11 @@ fn main() {
         opts.stride,
     );
     let mut file = std::fs::File::create(&opts.output).unwrap();
-    writeln!(file, "Time(ps) MSD (A^2)").unwrap();
+    writeln!(file, "Time(ps) MSD(A^2)").unwrap();
     for (x, y) in times.iter().zip(msd.iter()) {
         writeln!(file, "{:.6} {:.6}", x, y).unwrap();
     }
+    logger.info(format!("MSD written to {}", opts.output));
 }
 
 pub struct Atoms {

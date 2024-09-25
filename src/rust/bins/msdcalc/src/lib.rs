@@ -3,6 +3,7 @@ extern crate ndarray_linalg;
 
 use ndarray::prelude::*;
 use ndarray_linalg::Inverse;
+use paris;
 
 pub fn apply_mic(dr: &Array1<f64>, cell: &Array2<f64>, inv_cell: &Array2<f64>) -> Array1<f64> {
     let dr_mic = {
@@ -61,6 +62,7 @@ pub fn calculate_msd(
     dt: f64,
     stride: usize,
 ) -> (Array1<f64>, Array1<f64>) {
+    let mut logger = paris::Logger::new();
     let n_frames = positions.dim().0;
     let n_atoms = positions.dim().1;
     let inv_cell = cell.inv().unwrap();
@@ -87,7 +89,7 @@ pub fn calculate_msd(
         Some(max_time_delta) => ((max_time_delta / (dt * stride as f64)) as usize).min(n_frames - 1),
         None => n_frames - 1,
     };
-    println!("Calculating MSD for {} frames: total {:.1} ps", max_delta, max_time_delta.unwrap_or(n_frames as f64 * dt * stride as f64));
+    logger.info(format!("Calculating MSD for {} frames: total {:.1} ps", max_delta, max_time_delta.unwrap_or(n_frames as f64 * dt * stride as f64)));
     let elem_positions = {
         let mut pos = Array3::zeros((n_frames, atom_indices.len(), 3));
         for (ii, &i) in atom_indices.iter().enumerate() {

@@ -10,4 +10,5 @@ extxyz = "0.2.0"
 ndarray = { version = "0.15.6", features = ["blas", "rayon"] }
 ndarray-linalg = { version = "0.16.0", features = ["openblas-static"] }
 ndarray-stats = "0.6.0"
+paris = "1.5.15"
 rayon = "1.10.0"
