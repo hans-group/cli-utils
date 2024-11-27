@@ -1,10 +1,13 @@
 use anyhow;
 use clap::Parser;
 use extxyz::{read_xyz_frames, Info, RawAtoms};
-use msdcalc::calculate_msd;
+use msdcalc::{calculate_diffusion_coefficient, calculate_ionic_conductivity, calculate_msd};
 use ndarray::prelude::*;
-use std::io::Write;
+use ndarray_linalg::Determinant;
 use paris;
+use serde::{Deserialize, Serialize};
+use serde_json;
+use std::io::Write;
 
 const LOGO: &str = r#"
                    _           _      
@@ -13,7 +16,7 @@ const LOGO: &str = r#"
 | | | | | \__ \ (_| | (_| (_| | | (__ 
 |_| |_| |_|___/\__,_|\___\__,_|_|\___|
 
-version 0.1.0 by Minjoon Hong
+version 0.2.0 by Minjoon Hong
 
 "#;
 
@@ -41,6 +44,24 @@ pub struct Options {
     /// Maximum time difference to consider. If None, all frames are considered.
     #[arg(short = 'M', long)]
     pub max_time_delta: Option<f64>,
+    /// The charge of the ion in the system. If None, ionic conductivity is not calculated.
+    #[arg(short = 'c', long)]
+    pub ion_charge: Option<i64>,
+    /// The temperature of the system in K. If None, ionic conductivity is calculated at 300 K.
+    #[arg(short = 'T', long, default_value = "300")]
+    pub temperature: Option<f64>,
+    /// If provided, the output is written in JSON format to specified file.
+    #[arg(long)]
+    pub json: Option<String>,
+}
+
+#[derive(Serialize, Deserialize)]
+struct OutputData {
+    species: Vec<String>,
+    times: Vec<f64>,
+    msd: Vec<f64>,
+    diffusion_coefficient: f64,
+    ionic_conductivity: Option<f64>,
 }
 
 fn main() {
@@ -64,12 +85,12 @@ fn main() {
 
     logger.info(format!("Number of selected frames: {}", positions.dim().0));
     logger.info(format!("Calculating MSD for species: {:?}", opts.species));
-    
+
     let (times, msd) = calculate_msd(
         positions,
         &cell,
-        symbols,
-        Some(opts.species),
+        symbols.clone(),
+        Some(opts.species.clone()),
         opts.max_time_delta,
         opts.dt,
         opts.stride,
@@ -80,6 +101,57 @@ fn main() {
         writeln!(file, "{:.6} {:.6}", x, y).unwrap();
     }
     logger.info(format!("MSD written to {}", opts.output));
+
+    // Compute diffusion coefficient
+    let diffusion_coefficient = calculate_diffusion_coefficient(&times, &msd, None);
+    logger.info(format!(
+        "Diffusion coefficient: {:.6e} m/s2",
+        diffusion_coefficient
+    ));
+    // Compute ionic conductivity
+    let ionic_conductivity = match opts.ion_charge {
+        Some(charge) => {
+            if opts.species.len() == 1 {
+                let elem = &opts.species[0];
+                let vol: f64 = cell.det().unwrap() * 1.0e-30; // convert to m^3
+                let temp = opts.temperature.unwrap_or(300.0);
+                let n_ion = symbols.iter().filter(|&x| x == elem).count();
+                let cond =
+                    calculate_ionic_conductivity(diffusion_coefficient, charge, temp, n_ion, vol);
+                if cond > 1.0 {
+                    logger.info(format!(
+                        "Ionic conductivity at {} K: {:.6} mS/cm",
+                        temp, cond
+                    ));
+                } else {
+                    logger.info(format!(
+                        "Ionic conductivity at {} K: {:.6e} mS/cm",
+                        temp, cond
+                    ));
+                }
+                Some(cond)
+            } else {
+                logger.info(
+                    "Skipping ionic conductivity calculation since multiple species are selected",
+                );
+                None
+            }
+        }
+        None => None,
+    };
+    if let Some(json_path) = opts.json {
+        let output_data = OutputData {
+            species: opts.species,
+            times: times.into_raw_vec(),
+            msd: msd.into_raw_vec(),
+            diffusion_coefficient,
+            ionic_conductivity,
+        };
+        let json = serde_json::to_string_pretty(&output_data).unwrap();
+        let mut file = std::fs::File::create(&json_path).unwrap();
+        writeln!(file, "{}", json).unwrap();
+        logger.info(format!("JSON output written to {}", json_path));
+    }
 }
 
 pub struct Atoms {

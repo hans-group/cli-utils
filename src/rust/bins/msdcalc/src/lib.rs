@@ -1,9 +1,13 @@
+pub mod linear_regression;
 extern crate ndarray;
 extern crate ndarray_linalg;
 
 use ndarray::prelude::*;
 use ndarray_linalg::Inverse;
 use paris;
+use linear_regression::LinearRegression;
+
+const K_B: f64 = 1.38064852e-23;
 
 pub fn apply_mic(dr: &Array1<f64>, cell: &Array2<f64>, inv_cell: &Array2<f64>) -> Array1<f64> {
     let dr_mic = {
@@ -86,10 +90,16 @@ pub fn calculate_msd(
     let atom_indices = Array1::<usize>::from(atom_indices);
     let unwrapped_positions = unwrap_positions(&positions, cell, &inv_cell);
     let max_delta = match max_time_delta {
-        Some(max_time_delta) => ((max_time_delta / (dt * stride as f64)) as usize).min(n_frames - 1),
+        Some(max_time_delta) => {
+            ((max_time_delta / (dt * stride as f64)) as usize).min(n_frames - 1)
+        }
         None => n_frames - 1,
     };
-    logger.info(format!("Calculating MSD for {} frames: total {:.1} ps", max_delta, max_time_delta.unwrap_or(n_frames as f64 * dt * stride as f64)));
+    logger.info(format!(
+        "Calculating MSD for {} frames: total {:.1} ps",
+        max_delta,
+        max_time_delta.unwrap_or(n_frames as f64 * dt * stride as f64)
+    ));
     let elem_positions = {
         let mut pos = Array3::zeros((n_frames, atom_indices.len(), 3));
         for (ii, &i) in atom_indices.iter().enumerate() {
@@ -103,4 +113,20 @@ pub fn calculate_msd(
     let times = Array1::range(0.0, max_delta as f64, 1.0) * dt * stride as f64;
 
     (times, msd)
+}
+
+pub fn calculate_diffusion_coefficient(time: &Array1<f64>, msd: &Array1<f64>, skip_steps: Option<usize>) -> f64 {
+    let skip_steps = skip_steps.unwrap_or(0);
+    let time = &time.slice(s![skip_steps..]);
+    let msd = &msd.slice(s![skip_steps..]);
+    let mut linreg = LinearRegression::new(true);
+    linreg.fit(&time.insert_axis(Axis(1)), msd);
+    let beta = linreg.beta.unwrap();
+    let slope = beta[1];
+    slope / 6.0 * 1.0e-8
+}
+
+pub fn calculate_ionic_conductivity(diffusion_coefficient: f64, ionic_charge: i64, temperature: f64, n_ion: usize, volume: f64) -> f64 {
+    let q = ionic_charge as f64 * 1.602176634 * 1.0e-19;
+    n_ion as f64 * q.powi(2) * diffusion_coefficient / (K_B * temperature * volume) * 10.0
 }

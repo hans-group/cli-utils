@@ -1,6 +1,6 @@
 [package]
 name = "msdcalc"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 
 [dependencies]
@@ -8,7 +8,9 @@ anyhow = "1.0.89"
 clap = { version = "4.5.18", features = ["derive"] }
 extxyz = "0.2.0"
 ndarray = { version = "0.15.6", features = ["blas", "rayon"] }
-ndarray-linalg = { version = "0.16.0", features = ["openblas-static"] }
+ndarray-linalg = { version = "0.16.0", features = ["intel-mkl-static"] }
 ndarray-stats = "0.6.0"
 paris = "1.5.15"
 rayon = "1.10.0"
+serde = "1.0.215"
+serde_json = "1.0.133"
