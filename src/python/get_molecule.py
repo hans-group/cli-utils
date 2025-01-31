@@ -103,7 +103,7 @@ def from_pubchem(
 
 @app.command()
 @click.argument("smiles")
-@click.option("--optimize", default=True, help="Optimize geometry with force field")
+@click.option("-O", "--optimize", default=True, help="Optimize geometry with force field")
 @click.option("-m", "--optimizemethod", default="mmff", help="Optimization method")
 @click.option("-o", "--output", type=str, default=None, help="Output filename")
 @click.option(
