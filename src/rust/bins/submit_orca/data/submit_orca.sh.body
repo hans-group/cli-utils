@@ -42,6 +42,10 @@ find $tdir -maxdepth 1 -type f -not -name '*.tmp' -not -name $inputfile -exec cp
 # Clean up
 cd $SLURM_SUBMIT_DIR
 
+# Convert output to json
+orca_2json orca.gbw
+orca_2json orca -property
+
 # If variable $KEEPTDIR is set to True, keep temporary directory
 if [ "$KEEPTDIR" != "True" ]
 then
