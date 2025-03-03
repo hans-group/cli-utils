@@ -16,7 +16,7 @@ pub fn check_partition(partition: &str) -> Result<String, String> {
     let given_partitions = partition.split(",").collect::<Vec<&str>>();
     match given_partitions
         .iter()
-        .all(|x| partitions.contains(&x.to_string()))
+        .all(|x| partitions.contains(&x.trim().to_string()))
     {
         true => Ok(partition.to_string()),
         false => Err(format!(
