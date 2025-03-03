@@ -1,11 +1,11 @@
 # Load modules & set environment variables
 module purge
-module add ORCA/5.0.3
+module add ORCA/6.0.1
 export RSH_COMMAND="/usr/bin/ssh -x"
 export scratchlocation=/scratch
 
 # Basic info
-orcadir="/TGM/Apps/ORCA/5.0.3/bin"
+orcadir="/TGM/Apps/ORCA/6.0.1/orca_6_0_1_linux_x86-64_shared_openmpi416_avx2"
 inputfile="orca.inp"
 basename="${inputfile%%.*}"
 outfile="$basename.out"
